@@ -11,6 +11,8 @@ class Play extends Phaser.Scene {
 
         // load spreadsheet
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+
+        this.load.atlas('emitterexplosion', './assets/explosion-realistic.png', './assets/explosion.json');
     }
 
     create() {
@@ -73,6 +75,17 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        // create emitter object
+        emitter = this.add.particles(0, 0, 'emitterexplosion', {
+            frame: ['muzzleflash7', 'muzzleflash3', 'muzzleflash2'],
+            lifespan: 750,
+            speed: {min: 0, max: 0},
+            scale: {start: 1.0, end: 0},
+            blendMode: 'ADD',
+            frequency: 100,
+            emitting: false
+        });
     }
 
     update() {
@@ -124,14 +137,19 @@ class Play extends Phaser.Scene {
         // temp hide ship
         ship.alpha = 0;
         
-        // create explosion sprite at ship's position
-        let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0, 0);
-        boom.anims.play('explode'); // play
-        boom.on('animationcomplete', () => { // callback
-            ship.reset(); // reset pos
-            ship.alpha = 1; // make ship visible
-            boom.destroy(); // remove explosion sprite
-        });
+        // emit explosion particles with delay at ship's position
+        let pos = new Phaser.Math.Vector2(ship.x, ship.y);
+        let counter = 0;
+        var int = setInterval(function() {
+            counter++;
+
+            if(counter >= Phaser.Math.Between(2, 5)) {
+                clearInterval(int); // stop interval 
+                ship.reset(); // reset pos
+                ship.alpha = 1; // make ship visible
+            }
+            emitter.emitParticle(1, pos.x + Phaser.Math.Between(-15, 15), pos.y + Phaser.Math.Between(-5, 5));
+        }, 100);
 
         // score add and repaint
         this.p1Score += ship.points;
