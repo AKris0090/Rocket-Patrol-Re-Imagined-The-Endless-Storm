@@ -86,9 +86,22 @@ class Play extends Phaser.Scene {
             frequency: 100,
             emitting: false
         });
+
+        // fire button
+        this.input.on('pointerdown', function (pointer)
+        {
+            if(pointer.leftButtonDown()) {
+                this.p1Rocket.isFiring = true;
+
+                // play sfx
+                this.p1Rocket.sfxRocket.play();
+            }
+        }, this);
     }
 
     update() {
+        this.p1Rocket.x = this.input.mousePointer.x;
+        
         // check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -140,6 +153,7 @@ class Play extends Phaser.Scene {
         // emit explosion particles with delay at ship's position
         let pos = new Phaser.Math.Vector2(ship.x, ship.y);
         let counter = 0;
+        // explosions on an interval
         var int = setInterval(function() {
             counter++;
 
@@ -149,7 +163,7 @@ class Play extends Phaser.Scene {
                 ship.alpha = 1; // make ship visible
             }
             emitter.emitParticle(1, pos.x + Phaser.Math.Between(-15, 15), pos.y + Phaser.Math.Between(-5, 5));
-        }, 100);
+        }, 150);
 
         // score add and repaint
         this.p1Score += ship.points;
