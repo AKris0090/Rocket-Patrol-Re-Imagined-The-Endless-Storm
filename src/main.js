@@ -1,9 +1,9 @@
 /* 
 Name: Arjun Krishnan
 Mod Title: Rocket Patrol Re-imagined: The Endless Storm
-Time: 5=6 hrs
+Time: 6.5 hrs
 Mods:
-    - Timing/Scoring mechanism, where successful hits add to timer. Different time values for each ship (5 pts)
+    - DONE: Timing/Scoring mechanism, where successful hits add to timer. Different time values for each ship (5 pts)
     - DONE: Particle emitter for particle explosion when rocket hits a spaceship (5 pts)
     - DONE: Mouse control for player movement and mouse click to fire (5 pts)
     - DONE: Display the remaining time on screen (3 pts)
