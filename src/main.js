@@ -1,7 +1,7 @@
 /* 
 Name: Arjun Krishnan
 Mod Title: Rocket Patrol Re-imagined: The Endless Storm
-Time: 
+Time: 2 hrs
 Mods:
     - Timing/Scoring mechanism, where successful hits add to timer. Different time values for each ship (5 pts)
     - Particle emitter for particle explosion when rocket hits a spaceship (5 pts)
@@ -11,6 +11,8 @@ Mods:
     - Create a new scrolling tile sprite for the background
 Citations:
     - Phaser 3 Sandbox: https://labs.phaser.io/edit.html?src=src/game%20objects/particle%20emitter/explode%20emitter.js&v=3.60.0
+    - Explosion json: https://github.com/photonstorm/phaser3-examples/blob/master/public/assets/particles/explosion.json
+    - Explosion png: https://github.com/photonstorm/phaser3-examples/blob/master/public/assets/particles/explosion.png
 */
 
 let config = {
