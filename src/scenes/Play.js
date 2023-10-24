@@ -63,7 +63,22 @@ class Play extends Phaser.Scene {
             },
             fixedWidth: 100
         }
+
+        let timeConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+              top: 5,
+              bottom: 5,
+            },
+            fixedWidth: 100
+        }
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
+
+        this.timeRight = this.add.text(this.game.config.width - borderUISize - borderPadding - this.scoreLeft.width, borderUISize + borderPadding * 2, game.settings.gameTimer, timeConfig);
 
         // GAME OVER flag
         this.gameOver = false;
@@ -100,8 +115,12 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        this.p1Rocket.x = this.input.mousePointer.x;
+        this.timeRight.setText(this.clock.getOverallRemainingSeconds());
         
+        if(this.input.mousePointer.x >= borderUISize + this.p1Rocket.width && this.input.mousePointer.x <= game.config.width - borderUISize - this.p1Rocket.width) {
+            this.p1Rocket.x = this.input.mousePointer.x;
+        }
+
         // check key input for restart
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -156,10 +175,10 @@ class Play extends Phaser.Scene {
         // explosions on an interval
         var int = setInterval(function() {
             counter++;
+            ship.reset(); // reset pos
 
             if(counter >= Phaser.Math.Between(2, 5)) {
                 clearInterval(int); // stop interval 
-                ship.reset(); // reset pos
                 ship.alpha = 1; // make ship visible
             }
             emitter.emitParticle(1, pos.x + Phaser.Math.Between(-15, 15), pos.y + Phaser.Math.Between(-5, 5));

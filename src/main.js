@@ -1,16 +1,18 @@
 /* 
 Name: Arjun Krishnan
 Mod Title: Rocket Patrol Re-imagined: The Endless Storm
-Time: 5 hrs
+Time: 5=6 hrs
 Mods:
     - Timing/Scoring mechanism, where successful hits add to timer. Different time values for each ship (5 pts)
     - DONE: Particle emitter for particle explosion when rocket hits a spaceship (5 pts)
     - DONE: Mouse control for player movement and mouse click to fire (5 pts)
-    - Display the remaining time on screen (3 pts)
+    - DONE: Display the remaining time on screen (3 pts)
     - DONE: Allow the player to control the rocket after its fired (1 pt)
     - Create a new scrolling tile sprite for the background
 Citations:
     - Phaser 3 Sandbox: https://labs.phaser.io/edit.html?src=src/game%20objects/particle%20emitter/explode%20emitter.js&v=3.60.0
+                        https://labs.phaser.io/edit.html?src=src/input/mouse/mouse%20down.js&v=3.60.0
+                        https://stackoverflow.com/questions/28104605/how-to-find-the-mouse-position-x-y-using-phaser
     - Explosion json: https://github.com/photonstorm/phaser3-examples/blob/master/public/assets/particles/explosion.json
     - Explosion png: https://github.com/photonstorm/phaser3-examples/blob/master/public/assets/particles/explosion.png
 */
